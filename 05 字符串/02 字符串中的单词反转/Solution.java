@@ -1,27 +1,15 @@
 class Solution {
     public String reverseMessage(String message) {
-        int left = 0;
-        Stack<String> stack = new Stack<>();
+        StringBuilder str = new StringBuilder();
         message = message.trim();
         char[] arr = message.toCharArray();
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[left] == ' ') {
-                left++;
-                continue;
-            }
-            if (arr[i] == ' ') {
-                stack.push(message.substring(left, i));
-                left = i;
-            }
+        int i = arr.length - 1, j = i;
+        while (i >= 0) {
+            while (i >= 0 && arr[i] != ' ') i--;
+            str.append(message.substring(i + 1, j + 1)).append(" ");
+            while (i >= 0 && arr[i] == ' ') i--;
+            j = i;
         }
-        stack.push(message.substring(left));
-        StringBuilder str = new StringBuilder();
-        while (!stack.isEmpty()) {
-            str.append(stack.pop());
-            if (!stack.isEmpty()) {
-                str.append(" ");
-            }
-        }
-        return str.toString();
+        return str.toString().trim();
     }
 }

@@ -14,18 +14,24 @@
  * }
  */
 class Solution {
-    List<Integer> list = new ArrayList<>();
+    int res, count;
 
     public int findTargetNode(TreeNode root, int cnt) {
+        count = cnt;
         dfs(root);
-        return list.get(list.size() - cnt);
+        return res;
     }
 
     void dfs(TreeNode root) {
         if (root == null)
             return;
-        dfs(root.left);
-        list.add(root.val);
         dfs(root.right);
+        if (count == 0)
+            return;
+        if (--count == 0) {
+            res = root.val;
+            return;
+        }
+        dfs(root.left);
     }
 }

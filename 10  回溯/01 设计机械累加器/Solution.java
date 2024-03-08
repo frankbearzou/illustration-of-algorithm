@@ -1,5 +1,6 @@
 class Solution {
     public int mechanicalAccumulator(int target) {
-        return (1 + target) * target / 2;
+        boolean b = target > 1 && (target += mechanicalAccumulator(target - 1)) > 0;
+        return target;
     }
 }
